@@ -20,6 +20,6 @@ We collect fund sales datasets of different customers from Ant Fortune, which is
 | is_weekend_delay       | indicates whether it is a weekend before a trading day                                                                                                                                                                                                |
 | holiday_num      | indicates how many statutory holidays occur before the trading day                                                                                                                                                                                    |
 
-Time series visualization of Fund dataset (first two lines) and other public datasets is shown as follows:
+Time series visualization of Fund dataset (first two lines) and public datasets is shown as follows:
 
 <img src="figure/Fund_Series_Vis.png" alt="替代文本" width="auto" height="350">
