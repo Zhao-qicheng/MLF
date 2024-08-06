@@ -2,7 +2,7 @@
 from tqdm.auto import tqdm
 
 from exp.exp_basic import Exp_Basic
-from models import MILA,PathFormer,PatchTST_ScaleFormer,PatchTST,NHits_Scaleformer,Autoformer_Scaleformer,NHits,FiLM
+from models import MLF,PathFormer,PatchTST_ScaleFormer,PatchTST,NHits_Scaleformer,Autoformer_Scaleformer,NHits,FiLM
 
 from utils.tools import  adjust_learning_rate, visual
 from utils.metrics import metric,MAPE_Fund
@@ -45,7 +45,7 @@ class Exp_Main(Exp_Basic):
 
         model_dict = {
 
-            'MILA':MILA,
+            'MLF':MLF,
             'PathFormer':PathFormer,
             'PatchTST_SFormer':PatchTST_SFormer,
             'PatchTST':PatchTST,
@@ -57,7 +57,7 @@ class Exp_Main(Exp_Basic):
         }
         model = model_dict[self.args.model].Model(configs=self.args).float()
 
-        # model = MILA.Model(self.args).float()
+        # model = MLF.Model(self.args).float()
 
         print(f"NUMBER OF PARAMETERS IN MODEL: {self.args.model}: {sum(p.numel() for p in model.parameters())}")
         return model
@@ -98,7 +98,7 @@ class Exp_Main(Exp_Basic):
 
                 if self.args.model == 'PathFormer':
                     outputs, balance_loss = self.model(batch_x)
-                elif self.args.model == 'MILA':
+                elif self.args.model == 'MLF':
                     outputs_all = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                     outputs, scale_all_rec, scale_all_patch = outputs_all
                 elif self.args.model == 'PatchTST_SFormer':
@@ -137,7 +137,7 @@ class Exp_Main(Exp_Basic):
 
         if self.args.model == 'PathFormer':
             outputs, balance_loss = self.model(batch_x)
-        elif self.args.model=='MILA':
+        elif self.args.model=='MLF':
             outputs_all = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
             outputs, scale_all_rec, scale_all_patch=outputs_all
         elif self.args.model=='PatchTST_SFormer':
@@ -148,7 +148,7 @@ class Exp_Main(Exp_Basic):
 
         rec_loss = 0
 
-        if 'MILA' in self.configs.model and self.configs.patch_squeeze and self.configs.reconstruct_loss and len(scale_all_rec.keys())!=0:
+        if 'MLF' in self.configs.model and self.configs.patch_squeeze and self.configs.reconstruct_loss and len(scale_all_rec.keys())!=0:
             for scale in scale_all_rec.keys():
                 rec_loss += self.criterion_rec(scale_all_rec[scale], scale_all_patch[scale])
             rec_loss /= (len(scale_all_rec.keys()))
@@ -166,7 +166,7 @@ class Exp_Main(Exp_Basic):
             loss=self.criterion_tmp(outputs, batch_y).mean()
         if self.args.model == 'PathFormer':
             loss+=balance_loss
-        elif self.args.model=='MILA':
+        elif self.args.model=='MLF':
             loss+=rec_loss
         loss.backward()
         self.model_optim.step()
@@ -312,7 +312,7 @@ class Exp_Main(Exp_Basic):
                 start_time = time.time()
                 if self.args.model == 'PathFormer':
                     outputs, balance_loss = self.model(batch_x)
-                elif self.args.model == 'MILA':
+                elif self.args.model == 'MLF':
                     outputs_all = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                     outputs, scale_all_rec, scale_all_patch = outputs_all
                 elif self.args.model == 'PatchTST_SFormer':
@@ -346,7 +346,7 @@ class Exp_Main(Exp_Basic):
                 start_time = time.time()
                 if self.args.model == 'PathFormer':
                     outputs, balance_loss = self.model(batch_x)
-                elif self.args.model == 'MILA':
+                elif self.args.model == 'MLF':
                     outputs_all = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                     outputs, scale_all_rec, scale_all_patch = outputs_all
                 elif self.args.model == 'PatchTST_SFormer':

@@ -117,7 +117,7 @@ def main():
 
     np.random.seed(fix_seed)
 
-    args.MILA = True
+    args.MLF = True
     args.equal_patch = False
     args.scal_all = [5, 10, 30, 120]  # [5,10,30,60,120,150]
     args.patchLen_stride_all = [[5, 4] for _ in range(len(args.scal_all))]
@@ -130,7 +130,7 @@ def main():
     args.data_type = 'ETTh1'  # 'ETTh1' 'electricity' 'ETTm1' 'exchange_rate' 'national_illness' 'ETTm2' 'ETTh2'
     args.train_only = False
     args.loss = 'mse'
-    args.model = 'MILA'
+    args.model = 'MLF'
     args.target = 'OT'
     args.root_path = './dataset/Public_Datasets/'
     args.batch_size = 128

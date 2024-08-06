@@ -22,11 +22,11 @@ def get_file_info(directory):
 def main():
     # seq_len = [None,10,None,30]
     # seq_len = [30]
-    # seq_len = [None] #MILA
+    # seq_len = [None] #MLF
     # if seq_len[0]!=None:
     #     variant='PatchTST'
     # else:
-    #     variant='MILA'
+    #     variant='MLF'
 
     seed = 1986  # 1986 2021 2023 1995 2015 2022
     fix_seed = seed
@@ -126,7 +126,7 @@ def main():
     # pred_len_ = 8
     # pred_len_ = 10
     args.speed_mode = True
-    args.MILA = True
+    args.MLF = True
 
     args.scal_all = [10, 20, 30]
     args.patchLen_stride_all = [[5, 4] for _ in range(len(args.scal_all))]
@@ -141,7 +141,7 @@ def main():
     args.train_only = False
     args.dived = True
     args.loss = 'mse'
-    args.model = 'MILA'
+    args.model = 'MLF'
     data_path = './dataset/Fund_Dataset'
     args.root_path = data_path
     args.data_path_list = os.listdir(data_path)
@@ -173,7 +173,7 @@ def main():
         extra = extra + '_' + str(period)
     args.state = 'train'
 
-    args.checkpoints = './checkpoints_MILA_shortterm/' + args.data + '/' + model_act + '/' + 'random_seed_' + str(
+    args.checkpoints = './checkpoints_MLF_shortterm/' + args.data + '/' + model_act + '/' + 'random_seed_' + str(
         seed)
     args.individual = 0
     args.d_layers = 1

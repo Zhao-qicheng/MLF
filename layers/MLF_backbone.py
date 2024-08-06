@@ -1,4 +1,4 @@
-__all__ = ['MILA_backbone']
+__all__ = ['MLF_backbone']
 
 # Cell
 import time
@@ -7,7 +7,7 @@ import torch
 from torch import nn
 from torch import Tensor
 import torch.nn.functional as F
-from layers.MILA_layers import *
+from layers.MLF_layers import *
 import numpy as np
 import torch.nn.functional as f
 from layers.RevIN import RevIN
@@ -40,7 +40,7 @@ class ForecastingBlock(nn.Module):
         forecast = self.forecast_fc(x)
         return backcast,forecast
 
-class MILA_backbone(nn.Module):
+class MLF_backbone(nn.Module):
     def __init__(self, c_in:int, context_window:int, target_window:int, patch_len:int, stride:int, max_seq_len:Optional[int]=1024, 
                  n_layers:int=3, d_model=128, n_heads=16, d_k:Optional[int]=None, d_v:Optional[int]=None,
                  d_ff:int=256, norm:str='BatchNorm', attn_dropout:float=0., dropout:float=0., act:str="gelu", key_padding_mask:bool='auto',
@@ -210,7 +210,7 @@ class TSTiEncoder(nn.Module):  #i means channel-independent
         self.dropout = nn.Dropout(dropout)
         self.scale_num = self.configs.scale_num
         # Encoder
-        self.encoder = MILAEncoder(q_len, d_model, n_heads,configs_=configs_, d_k=d_k, d_v=d_v, d_ff=d_ff, norm=norm, attn_dropout=attn_dropout, dropout=dropout,
+        self.encoder = MLFEncoder(q_len, d_model, n_heads,configs_=configs_, d_k=d_k, d_v=d_v, d_ff=d_ff, norm=norm, attn_dropout=attn_dropout, dropout=dropout,
                                    pre_norm=pre_norm, activation=act, res_attention=res_attention, n_layers=n_layers, store_attn=store_attn)
         self.flatten = nn.Flatten(start_dim=-2)
 
@@ -346,24 +346,24 @@ class LWI_Sub(nn.Module):
         return h
 
 # Cell
-class MILAEncoder(nn.Module):
+class MLFEncoder(nn.Module):
     def __init__(self, q_len, d_model, n_heads, configs_=None,d_k=None, d_v=None, d_ff=None,
                         norm='BatchNorm', attn_dropout=0., dropout=0., activation='gelu',
                         res_attention=False, n_layers=1, pre_norm=False, store_attn=False):
         super().__init__()
         self.configs=configs_
-        self.layers = nn.ModuleList([MILAEncoderLayer(d_model, n_heads=n_heads, d_k=d_k, d_v=d_v, d_ff=d_ff, norm=norm,args=self.configs,
+        self.layers = nn.ModuleList([MLFEncoderLayer(d_model, n_heads=n_heads, d_k=d_k, d_v=d_v, d_ff=d_ff, norm=norm,args=self.configs,
                                                       attn_dropout=attn_dropout, dropout=dropout,
                                                       activation=activation, res_attention=res_attention,
                                                       pre_norm=pre_norm, store_attn=store_attn) for i in range(n_layers)])
         self.res_attention = res_attention
 
-        self.MILA=True
+        self.MLF=True
         self.flatten = nn.Flatten(start_dim=-2)
         self.enc_block_all=nn.ModuleList()
         for i_e in range(self.configs.e_layers):
             self.enc_block_all.append(nn.ModuleList())
-        if self.MILA:
+        if self.MLF:
             for i_e in range(self.configs.e_layers):
                 self.res_blocks_all = nn.ModuleList()
                 for i in range(self.configs.scale_num):
@@ -462,7 +462,7 @@ class MILAEncoder(nn.Module):
         return adaptively_selected_forecast
 
 
-class MILAEncoderLayer(nn.Module):
+class MLFEncoderLayer(nn.Module):
     def __init__(self, d_model, n_heads, d_k=None, d_v=None, d_ff=256, store_attn=False,args=None,
                  norm='BatchNorm', attn_dropout=0, dropout=0., bias=True, activation="gelu", res_attention=False, pre_norm=False):
         super().__init__()

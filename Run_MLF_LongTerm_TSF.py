@@ -118,7 +118,7 @@ def main():
     args.data_type = data_type
     args.train_only = False
     args.loss = 'mse'
-    args.model = 'MILA'
+    args.model = 'MLF'
     args.target = 'OT'
     args.root_path = './dataset/Public_Datasets/'
     args.LWI = True  # Learnable Weighted-average Integration
@@ -449,7 +449,7 @@ def main():
     args.explore_fund_memory = False
     args.pred_len = pred_len_
     args.state = 'train'
-    args.checkpoints = './checkpoints_MILA_longterm/' + args.data_real + '/' + args.model + '/' + 'random_seed_' + str(
+    args.checkpoints = './checkpoints_MLF_longterm/' + args.data_real + '/' + args.model + '/' + 'random_seed_' + str(
         seed)
     extra = 'MultiPeriod'
     for period in args.scal_all:
