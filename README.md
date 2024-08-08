@@ -1,10 +1,10 @@
-# MILA
+# MLF
 Our experimental environments involve Pytorch 1.12.1 and Numpy 1.22.4.
 ## Downloading Datasets
   You can download the public datasets and Fund dataset used in our paper from https://drive.google.com/drive/folders/1IecxNQqH6hYEgaZT70t273BFHV-WeIw1?usp=sharing. The downloaded folders e.g., "Fund_Dataset",  should be placed at the "dataset" folder. 
   
 ## Reproducing Paper Results
-We have provided the experimental run scripts for MILA and baseline models (PatchTST, Pathformer, Scaleformer, NHits and FiLM) on both the Fund dataset and the public datasets. The corresponding model names and forecasting tasks are included in the script names. 
+We have provided the experimental run scripts for MLF and baseline models (PatchTST, Pathformer, Scaleformer, NHits and FiLM) on both the Fund dataset and the public datasets. The corresponding model names and forecasting tasks are included in the script names. 
 The hyperparameters used for experiments of different methods have been set in their respective scripts to reproduce the experimental results of the paper.
   
 ## Introduction of Fund Sales Dataset
