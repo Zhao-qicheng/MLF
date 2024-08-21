@@ -5,11 +5,11 @@ Our experimental environments involve Pytorch 1.12.1 and Numpy 1.22.4.
   
 ## Reproducing Paper Results
 We have provided the experimental run scripts for MLF and baseline models (PatchTST, Pathformer, Scaleformer, NHits and FiLM) on both the Fund dataset and the public datasets. The corresponding model names and forecasting tasks are included in the script names. 
-The hyperparameters used for experiments of different methods have been set in their respective scripts to reproduce the experimental results of the paper, including the improvement ratios of MLF over various baselines on short-term prediction task:
+The hyperparameters used for experiments of different methods have been set in their respective scripts to reproduce the experimental results of the paper, **including the improvement ratios of MLF over various baselines on short-term prediction task:**
 
 <img src="figure/Shortterm_task_improvements.jpg" alt="替代文本" width="auto" height="440">
 
-and long term prediction task:
+**and long term prediction task:**
 
 <img src="figure/Longterm_task_improvements.jpg" alt="替代文本" width="auto" height="350">
 
