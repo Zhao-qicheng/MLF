@@ -5,8 +5,14 @@ Our experimental environments involve Pytorch 1.12.1 and Numpy 1.22.4.
   
 ## Reproducing Paper Results
 We have provided the experimental run scripts for MLF and baseline models (PatchTST, Pathformer, Scaleformer, NHits and FiLM) on both the Fund dataset and the public datasets. The corresponding model names and forecasting tasks are included in the script names. 
-The hyperparameters used for experiments of different methods have been set in their respective scripts to reproduce the experimental results of the paper.
-  
+The hyperparameters used for experiments of different methods have been set in their respective scripts to reproduce the experimental results of the paper, including the improvement ratios of MLF over various baselines on short-term prediction task:
+
+<img src="figure/Shortterm_task_improvements.jpg" alt="替代文本" width="auto" height="350">
+
+and long term prediction task:
+
+<img src="figure/Longterm_task_improvements.jpg" alt="替代文本" width="auto" height="350">
+
 ## Introduction of Fund Sales Dataset
 We collect fund sales datasets of different customers from Ant Fortune, which is an online wealth management platform on the Alipay APP. A subset of the 66 fund datasets covering January 2021 to January 2023 is currently released due to confidentiality reasons. The variable and description of each fund product are as follows: 
 
