@@ -47,10 +47,10 @@ class Exp_Main(Exp_Basic):
 
             'MLF':MLF,
             'PathFormer':PathFormer,
-            'PatchTST_SFormer':PatchTST_SFormer,
+            'PatchTST_SFormer':PatchTST_ScaleFormer,
             'PatchTST':PatchTST,
-            'NHitsMS': NHitsMS,
-            'AutoformerMS': AutoformerMS,
+            'NHits_Scaleformer': NHits_Scaleformer,
+            'Autoformer_Scaleformer': Autoformer_Scaleformer,
             'NHits': NHits,
             'FiLM': FiLM,
 
