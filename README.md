@@ -15,7 +15,7 @@ The hyperparameters used for experiments of different methods have been set in t
 <img src="figure/Longterm_task_improvements.jpg" alt="替代文本" width="auto" height="350">
 
 ## Introduction of Fund Sales Dataset
-We collect fund sales datasets of different customers from Ant Fortune, which is an online wealth management platform on the Alipay APP. A subset of the 66 fund datasets covering January 2021 to January 2023 is currently released due to confidentiality reasons. The variable and description of each fund product are as follows: 
+We collect fund sales datasets of different customers from Ant Fortune, which is an online wealth management platform on the Alipay APP. A subset of fund datasets covering January 2021 to January 2023 is currently released due to confidentiality reasons. The variable and description of each fund product are as follows: 
 
 | Variable       | Description                                                                                                                                                                                                                                           |
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
