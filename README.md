@@ -6,23 +6,23 @@ MLF incorporates multiple inputs with varying lengths (periods) to achieve bette
 
 In our work, multi-period inputs refer to multiple original time series windows with varying input lengths, as shown in follwoing sub-figure (c). This is different from the multi-scale inputs in Pyraformer and Scaleformer, which are obtained by downsampling from the same fixed input length (follwoing sub-figure (b)).
 
-<img src="figure/MultiPeriod_MultiScale.jpg" alt="替代文本" width="auto" height="210">
+<img src="figure/MultiPeriod_MultiScale.jpg" alt="替代文本" width="auto" height="220">
 
 Different input lengths have a significant impact on prediction accuracy. However, selecting appropriate input lengths is a crucial challenge affecting time series forecasting.  we propose MLF to extract the semantic information of short-medium-long-term individually using sequences with varying lengths, to avoid model fails to learn the different semantics under only long-term inputs, e.g., the prediction error of Pathformer and Scaleformer using long-term sequence inputs is higher than that of short-term one. 
 
 It's not easy to use inputs of different lengths simultaneously for prediction due to challenges caused by multi-period characteristics. As shown in the following figure, MLF is a benchmark that exlpores an architecture consists of various componments to address the challenges to incorporate multiple inputs with varying lengths to achieve better accuracy.
 
-<img src="figure/MultiPeriod_Characteristics.jpg" alt="替代文本" width="auto" height="160">
+<img src="figure/MultiPeriod_Characteristics.jpg" alt="替代文本" width="auto" height="170">
 
 ## Overall architecture
 The overall architecture of MLF is shown in following figure.
 
-<img src="figure/Frame_Work.jpg" alt="替代文本" width="auto" height="280">
+<img src="figure/Frame_Work.jpg" alt="替代文本" width="auto" height="290">
 
 The two simple but effective componments of MLF are shown in following figure. For instance, the Patch Squeeze module significantly improves efficiency
 while maintaining good accuracy in the long-term TSF task.
 
-<img src="figure/MAP_PS.jpg" alt="替代文本" width="auto" height="260">
+<img src="figure/MAP_PS.jpg" alt="替代文本" width="auto" height="270">
 
 
 ## Downloading Datasets
@@ -43,4 +43,4 @@ We collect fund sales datasets of different customers from Ant Fortune, which is
 
 Time series visualization of Fund dataset (first two lines) and public datasets is shown as follows:
 
-<img src="figure/Fund_Series_Vis.png" alt="替代文本" width="auto" height="300">
+<img src="figure/Fund_Series_Vis.png" alt="替代文本" width="auto" height="310">
