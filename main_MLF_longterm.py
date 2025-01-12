@@ -81,7 +81,7 @@ def main():
     parser.add_argument('--reconstruct_loss', action='store_true',
                         help='whether to use reconstruction loss for patch squeeze', default=False)
     parser.add_argument('--LWI', action='store_true',
-                        help='Learnable Weighted-average Integration', default=True)
+                        help='Learnable Weighted-average Integration', default=False)
     parser.add_argument('--MAP', action='store_true',
                         help='Multi-period self-Adaptive Patching', default=True)
     # optimization
@@ -103,13 +103,12 @@ def main():
     parser.add_argument('--devices', type=str, default='0,1', help='device ids of multile gpus')
     args = parser.parse_args()
 
-    args.speed_mode = False
+    args.speed_mode = True
     # data_type_all = ['ETTh1', 'ETTh2', 'ETTm1', 'ETTm2', 'weather']
-    # pre_len=[96,192,336,720]
-    data_type = 'ETTm1'
-    pred_len_ = 96
-    # we observe consistent performance improvements under various seeds:
-    seed = 1986  # 2021 2023 1995 2015 2022
+    data_type = 'weather'
+    pred_len_ = 720
+    seed = 1986  # 2021 2023
+    args.gpu = 0
     fix_seed = seed
     torch.manual_seed(fix_seed)
     random.seed(fix_seed)
@@ -121,7 +120,7 @@ def main():
     args.model = 'MLF'
     args.target = 'OT'
     args.root_path = './dataset/Public_Datasets/'
-    args.LWI = True  # Learnable Weighted-average Integration
+
     args.fixed_patch_num = 64
     args.MAP_alpha = 2
     ###equal patch
@@ -163,8 +162,30 @@ def main():
             args.patch_squeeze = True
             args.squeeze_factor = [4 for _ in range(len(args.scal_all))]
 
-        elif pred_len_ == 720 or pred_len_ == 336:
+        elif pred_len_ == 336:
             args.scal_all = [128, 512]
+            # [patch_length L=int(n^s/N)*alpha, stride K=int(n^s/N)]
+            args.patchLen_stride_all = []
+            args.equal_patch_len = []
+            for i, period_s in enumerate(args.scal_all):
+                args.patchLen_stride_all.append(
+                    [int(period_s / args.fixed_patch_num) * args.MAP_alpha, int(period_s / args.fixed_patch_num)])
+                args.equal_patch_len.append(int(period_s / args.fixed_patch_num) * args.MAP_alpha)
+            if not args.MAP:
+                # using fixed patch length
+                args.patchLen_stride_all = [args.patchLen_stride_all[-1] for _ in range(len(args.scal_all))]
+            else:
+                # using self-adaptive patch length and stride
+                pass
+            args.max_patch_len = args.patchLen_stride_all[-1][0]
+            args.patch_squeeze = True
+            args.squeeze_factor = [2 for _ in range(len(args.scal_all))]
+
+        elif pred_len_ == 720:
+            # args.D_norm = False
+            # args.revin_norm = True
+
+            args.scal_all = [128, 384]
             # [patch_length L=int(n^s/N)*alpha, stride K=int(n^s/N)]
             args.patchLen_stride_all = []
             args.equal_patch_len = []
@@ -220,7 +241,9 @@ def main():
             args.squeeze_factor = [4 for _ in range(len(args.scal_all))]
 
         elif pred_len_ == 720:
+            args.LWI = True
             args.scal_all = [128, 512]
+            args.scal_all = [128, 384, 512]
             # [patch_length L=int(n^s/N)*alpha, stride K=int(n^s/N)]
             args.patchLen_stride_all = []
             args.equal_patch_len = []
@@ -255,9 +278,9 @@ def main():
         args.revin_norm = True
         args.redundancy_scaling = True
         args.activation_tag = False
-        args.reconstruct_loss = True
         args.embed_dim = 3
         args.patch_squeeze = True
+
         if pred_len_ == 96 or pred_len_ == 192:
             args.scal_all = [128, 384, 512, 768]
             # [patch_length L=int(n^s/N)*alpha, stride K=int(n^s/N)]
@@ -276,7 +299,7 @@ def main():
             args.max_patch_len = args.patchLen_stride_all[-1][0]
             args.patch_squeeze = True
             args.squeeze_factor = [4 for _ in range(len(args.scal_all))]
-        elif pred_len_ == 336 or pred_len_ == 720:
+        elif pred_len_ == 336:
             args.scal_all = [128, 384, 512, 768, 1024]
             # [patch_length L=int(n^s/N)*alpha, stride K=int(n^s/N)]
             args.patchLen_stride_all = []
@@ -295,6 +318,30 @@ def main():
             args.equal_patch_len_or = [4, 12, 16, 24, 32]
             args.patch_squeeze = True
             args.squeeze_factor = [8 for _ in range(len(args.scal_all))]
+        elif pred_len_ == 720:
+            args.LWI = True
+
+            # args.scal_all = [128, 384, 512, 768, 1024]
+            args.scal_all = [128, 384, 512, 1024]
+            # args.scal_all = [128, 512,  1024]
+            # [patch_length L=int(n^s/N)*alpha, stride K=int(n^s/N)]
+            args.patchLen_stride_all = []
+            args.equal_patch_len = []
+            for i, period_s in enumerate(args.scal_all):
+                args.patchLen_stride_all.append(
+                    [int(period_s / args.fixed_patch_num) * args.MAP_alpha, int(period_s / args.fixed_patch_num)])
+                args.equal_patch_len.append(int(period_s / args.fixed_patch_num) * args.MAP_alpha)
+            if not args.MAP:
+                # using fixed patch length
+                args.patchLen_stride_all = [args.patchLen_stride_all[-1] for _ in range(len(args.scal_all))]
+            else:
+                # using self-adaptive patch length and stride
+                pass
+            args.max_patch_len = args.patchLen_stride_all[-1][0]
+            # args.equal_patch_len_or = [4, 12, 16, 24, 32]
+            args.patch_squeeze = True
+            args.squeeze_factor = [8 for _ in range(len(args.scal_all))]
+
         args.max_patch_len = args.patchLen_stride_all[-1][0]
 
     elif args.data_type == 'ETTm2':
@@ -378,6 +425,7 @@ def main():
 
 
     elif args.data_type == 'weather':
+        args.LWI = True
         args.data_path = 'weather.csv'
         args.model_id = 'weather'
         args.data = 'custom'
@@ -451,6 +499,7 @@ def main():
     args.state = 'train'
     args.checkpoints = './checkpoints_MLF_longterm/' + args.data_real + '/' + args.model + '/' + 'random_seed_' + str(
         seed)
+
     extra = 'MultiPeriod'
     for period in args.scal_all:
         extra = extra + '_' + str(period)
@@ -460,15 +509,17 @@ def main():
     args.label_len = 0
     args.is_training = True
     args.only_test = False
-    args.train_epochs = 30
+    args.train_epochs = 10
+
+
     args.record = True
-    args.gpu = 5
+
     args.itr = 1
     args.e_layers = 3
     args.script_id = '0_'  # model checkpoint id
     args.device = 'cuda:' + str(args.gpu)
     print('Args in experiment:')
-
+    # extra
     print(vars(args))
     Exp = Exp_Main
     args.is_training = True
@@ -485,13 +536,12 @@ def main():
             print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
             exp.test(setting, test=1)
 
-            if args.do_predict:
-                print('>>>>>>>predicting : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
-                exp.predict(setting, True)
+            # if args.do_predict:
+            #     print('>>>>>>>predicting : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
+            #     exp.predict(setting, True)
 
             torch.cuda.empty_cache()
-            best_model_path = args.save_path + '/' + args.script_id + 'checkpoint.pth'
-            os.remove(best_model_path)
+
 
 
 if __name__ == "__main__":
