@@ -1,4 +1,6 @@
-## Multi-period Learning for Financial Time Series Forecasting (MLF, KDD2025)
+## Multi-period Learning for Financial Time Series Forecasting (MLF)
+
+#### KDD2025
 
 ###### Simple introduction
 
