@@ -1,8 +1,5 @@
-## Multi-period Learning for Financial Time Series Forecasting (MLF)
+### Multi-period Learning for Financial Time Series Forecasting (MLF, KDD2025)
 
-#### KDD2025
-
-###### Simple introduction
 
 This is code for Multi-period Learning for Financial Time Series Forecasting (MLF, published in KDD 2025), which incorporates multiple inputs with varying lengths (periods) to achieve better accuracy and reduces the costs of selecting input lengths during training.
 
@@ -16,7 +13,7 @@ It's not easy to use inputs of different lengths simultaneously for prediction d
 
 <img src="figure/MultiPeriod_Characteristics.jpg" alt="替代文本" width="auto" height="170">
 
-## Overall architecture
+### Overall architecture
 The overall architecture of MLF is shown in following figure.
 
 <img src="figure/Frame_Work.jpg" alt="替代文本" width="auto" height="290">
@@ -27,10 +24,10 @@ while maintaining good accuracy in the long-term TSF task.
 <img src="figure/MAP_PS.jpg" alt="替代文本" width="auto" height="270">
 
 
-## Downloading Datasets
+### Downloading Datasets
   You can download the public datasets and Fund dataset used in our paper from https://drive.google.com/drive/folders/1IecxNQqH6hYEgaZT70t273BFHV-WeIw1?usp=sharing. The downloaded folders e.g., "Fund_Dataset",  should be placed at the "dataset" folder. Due to confidentiality reasons, we can only disclose partial data of fund products. The average holding period of Fund 1, Fund 2, and Fund 3 gradually increases, and the overall time pattern distribution also changes, which can be used for a more comprehensive evaluation of the algorithm's effectiveness. 
 
-## Introduction of Fund Sales Dataset
+### Introduction of Fund Sales Dataset
 We collect fund sales datasets of different customers from Ant Fortune, which is an online wealth management platform on the Alipay APP. A subset of fund datasets covering January 2021 to January 2023 is currently released due to confidentiality reasons. The variable and description of each fund product are as follows: 
 
 | Variable       | Description                                                                                                                                                                                                                                           |
