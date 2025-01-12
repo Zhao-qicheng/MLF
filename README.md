@@ -1,5 +1,5 @@
 # Multi-period Learning for Financial Time Series Forecasting (MLF, KDD2025)
-MLF incorporates multiple inputs with varying lengths (periods) to achieve better accuracy and reduces the costs of selecting input lengths during training.
+This is code for Multi-period Learning for Financial Time Series Forecasting (MLF), which incorporates multiple inputs with varying lengths (periods) to achieve better accuracy and reduces the costs of selecting input lengths during training.
 
 # Simple introduction
 
