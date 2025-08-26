@@ -448,7 +448,6 @@ class Dataset_Fund(Dataset):
         self.scaler = StandardScaler()
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
-
         df_raw.rename(columns={'transaction_date':'date'},inplace=True)
         date_inf=pd.DataFrame()
         date_inf['date']=df_raw['date']
@@ -461,12 +460,11 @@ class Dataset_Fund(Dataset):
         date_inf['year'] = date_inf['date'].dt.year
         date_inf['year'] = pd.Categorical(date_inf['year']).codes
 
-
         date_inf.drop(['date'],axis=1,inplace=True)
 
         df_raw['embid']=df_raw['is_summarydate'].astype('string')+df_raw['is_weekend_delay'].astype('string')+df_raw['holiday_num'].astype('string')
         df_raw['embid'] = pd.Categorical(df_raw['embid']).codes
-        embed_clos=['product_pid','is_summarydate','embid', 'holiday_num','is_weekend_delay']
+        embed_clos=['is_summarydate','embid', 'holiday_num','is_weekend_delay']
         self.df_embed_id = df_raw[embed_clos].to_numpy()
         self.df_embed_id=np.concatenate([self.df_embed_id ,date_inf],axis=-1)
 

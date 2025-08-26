@@ -64,6 +64,7 @@ def data_provider(args, flag):
     cal_scaler=args.cal_scaler
     args.flag=flag
     args.scaler_custom=None
+
     if args.state == 'data_process':
         if cal_scaler:
             args.scaler_custom=obtain_max_scaler(args)
@@ -72,8 +73,6 @@ def data_provider(args, flag):
 
         all_efective_dataset=[]
         for data_path in args.data_path_list:
-            # print(data_path)
-            # time.sleep(500)
             data_set = Data(
                 root_path=args.root_path,
                 data_path=data_path,

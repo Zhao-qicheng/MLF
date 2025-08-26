@@ -138,11 +138,13 @@ def main():
     args.redundancy_scaling = False
     args.activation_tag = True
     args.data = 'Fund'
+    args.dataset_name='Fund1'#Fund2 Fund3
     args.train_only = False
     args.dived = True
     args.loss = 'mse'
     args.model = 'MLF'
-    data_path = './dataset/Fund_Dataset'
+    data_path = './dataset/Fund_Dataset/'+args.dataset_name
+    args.folder_path='./processed1/'
     args.root_path = data_path
     args.data_path_list = os.listdir(data_path)
     args.target = 'redeem_amt'

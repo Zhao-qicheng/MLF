@@ -51,8 +51,8 @@ class Data_Process():
 
 
     def process_data(self, setting,mode='train'):
-        if not os.path.exists(folder_path):
-            os.makedirs(folder_path)
+        if not os.path.exists(self.folder_path):
+            os.makedirs(self.folder_path)
 
         train_data_all, train_loader_all = self._get_data(flag='train')
 
