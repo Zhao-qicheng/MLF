@@ -455,7 +455,7 @@ class Dataset_Fund(Dataset):
         date_inf['date'] = pd.to_datetime(date_inf['date'])
 
         date_inf['day_of_year'] = date_inf['date'].dt.dayofyear
-        date_inf['week_of_year'] = date_inf['date'].dt.week
+        date_inf['week_of_year'] = date_inf['date'].dt.isocalendar().week.astype(int)
         date_inf['month'] = date_inf['date'].dt.month
         date_inf['year'] = date_inf['date'].dt.year
         date_inf['year'] = pd.Categorical(date_inf['year']).codes
@@ -592,7 +592,7 @@ class Dataset_Stock(Dataset):
         date_inf['date'] = pd.to_datetime(date_inf['date'])
 
         date_inf['day_of_year'] = date_inf['date'].dt.dayofyear
-        date_inf['week_of_year'] = date_inf['date'].dt.week
+        date_inf['week_of_year'] = date_inf['date'].dt.isocalendar().week.astype(int)
         date_inf['month'] = date_inf['date'].dt.month
         date_inf['year'] = date_inf['date'].dt.year
         date_inf['year'] = pd.Categorical(date_inf['year']).codes
