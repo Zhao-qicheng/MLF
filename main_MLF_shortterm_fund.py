@@ -125,7 +125,11 @@ def main():
     # pred_len_ = 5
     # pred_len_ = 8
     # pred_len_ = 10
-    args.speed_mode = True
+
+    # True时不保存任何检查点，False时会保存检查点，并保存最佳模型
+    # args.speed_mode = True
+    args.speed_mode = False
+
     args.MLF = True
 
     args.scal_all = [10, 20, 30]
