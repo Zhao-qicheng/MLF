@@ -388,6 +388,18 @@ class Exp_Main(Exp_Basic):
         self.configs.path=path
         best_model_path = path + '/' + self.args.script_id + 'checkpoint.pth'
         self.criterion = MAPE_Fund(self.args).cal_fund_val
+        
+        '''
+        test=1（重新加载权重）: 
+        在评测开始前，从 checkpoints/<setting>/<script_id>checkpoint.pth 强制加载保存的最优模型再测试。
+        适合单独跑测试、复现结果、或训练和测试分开在不同进程/时间执行的场景。
+        '''
+        '''
+        test=0（不重新加载）: 
+        直接用内存中当前的 self.model 做评测。
+        若刚刚跑完 train()，两者通常等价，因为训练末尾已把最佳权重加载回模型。
+        适合训练和测试在同一进程/时间执行的场景。
+        '''
         self.args.mode = 'test'
         if test:
             print('loading model')
