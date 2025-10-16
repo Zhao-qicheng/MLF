@@ -40,6 +40,13 @@ def obtain_max_scaler(args):
     return scaler
 
 def data_provider(args, flag):
+
+    '''
+    flag：数据集类型（train、val、test）
+    shuffle_flag：是否打乱数据顺序（False 表示不打乱）
+    drop_last：是否丢弃最后一个不完整的批次（False 表示不丢弃）
+    '''
+
     test_all=['product8.csv', 'product140.csv', 'product109.csv', 'product88.csv', 'product137.csv', 'product149.csv', 'product96.csv', 'product84.csv', 'product83.csv', 'product131.csv', 'product147.csv', 'product108.csv', 'product87.csv', 'product118.csv', 'product111.csv', 'product143.csv', 'product122.csv', 'product102.csv', 'product112.csv', 'product116.csv', 'product92.csv', 'product80.csv', 'product126.csv', 'product150.csv', 'product93.csv', 'product130.csv', 'product89.csv', 'product42.csv', 'product125.csv', 'product91.csv', 'product100.csv', 'product107.csv', 'product103.csv', 'product98.csv', 'product64.csv', 'product123.csv', 'product138.csv', 'product124.csv', 'product81.csv', 'product95.csv', 'product63.csv', 'product139.csv', 'product120.csv', 'product94.csv', 'product99.csv', 'product141.csv', 'product82.csv', 'product113.csv', 'product115.csv', 'product110.csv', 'product136.csv', 'product106.csv', 'product79.csv', 'product148.csv', 'product117.csv', 'product114.csv', 'product119.csv', 'product62.csv', 'product101.csv', 'product78.csv', 'product90.csv', 'product105.csv', 'product86.csv', 'product129.csv', 'product144.csv', 'product104.csv']
 
     Data = data_dict[args.data]
@@ -59,8 +66,10 @@ def data_provider(args, flag):
         drop_last = False
         batch_size = args.batch_size
         freq = args.freq
+
     print(flag,shuffle_flag,drop_last)
     # time.sleep(500)
+    
     cal_scaler=args.cal_scaler
     args.flag=flag
     args.scaler_custom=None
