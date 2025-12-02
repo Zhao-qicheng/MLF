@@ -108,7 +108,7 @@ def main():
     data_type = 'weather'
     pred_len_ = 720
     seed = 1986  # 2021 2023
-    args.gpu = 0
+    args.gpu = 1
     fix_seed = seed
     torch.manual_seed(fix_seed)
     random.seed(fix_seed)
