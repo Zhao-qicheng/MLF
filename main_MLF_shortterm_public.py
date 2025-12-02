@@ -130,7 +130,7 @@ def main():
     args.context_window = args.scal_all[0]  #
     args.context_window = None
 
-    args.data_type = 'ETTh1'  # 'ETTh1' 'electricity' 'ETTm1' 'exchange_rate' 'national_illness' 'ETTm2' 'ETTh2'
+    args.data_type = 'weather'  # 'ETTh1' 'electricity' 'ETTm1' 'exchange_rate' 'national_illness' 'ETTm2' 'ETTh2' 'weather'
     args.train_only = False
     args.loss = 'mse'
     args.model = 'MLF'
