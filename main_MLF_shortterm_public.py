@@ -149,7 +149,6 @@ def main():
         args.d_ff = 128
         args.pred_len = pred_len_
     elif args.data_type == 'exchange_rate':
-        args.data = 'custom'
         args.data = 'exchange_rate'
         args.data_path = 'exchange_rate.csv'
         c = 8
@@ -180,7 +179,7 @@ def main():
     elif args.data_type == 'weather':
         args.batch_size = 64
         args.data_path = 'weather.csv'
-        args.data = 'custom'
+        args.data = 'weather'
         c = 21
         args.enc_in = c
         args.dec_in = c
@@ -195,7 +194,7 @@ def main():
         args.batch_size = 16
     elif args.data_type == 'electricity':
         args.data_path = 'electricity.csv'
-        args.data = 'custom'
+        args.data = 'electricity'
         args.model_id = 'electricity'
         c = 321
         args.enc_in = c
