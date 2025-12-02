@@ -179,7 +179,7 @@ def main():
     elif args.data_type == 'weather':
         args.batch_size = 64
         args.data_path = 'weather.csv'
-        args.data = 'weather'
+        args.data = 'custom'
         c = 21
         args.enc_in = c
         args.dec_in = c
@@ -194,7 +194,7 @@ def main():
         args.batch_size = 16
     elif args.data_type == 'electricity':
         args.data_path = 'electricity.csv'
-        args.data = 'electricity'
+        args.data = 'custom'
         args.model_id = 'electricity'
         c = 321
         args.enc_in = c
@@ -225,7 +225,7 @@ def main():
     args.pred_len = pred_len_
     model_act = args.model
     args.state = 'train'
-    args.checkpoints = './checkpoints_shortterm_public_datasets/' + args.data + '/' + model_act + '/' + 'random_seed_' + str(
+    args.checkpoints = './checkpoints_shortterm_public_datasets/' + args.data_type + '/' + model_act + '/' + 'random_seed_' + str(
         seed)
     args.individual = 0
     args.d_layers = 1
